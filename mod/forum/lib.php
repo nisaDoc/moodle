@@ -2092,7 +2092,8 @@ function forum_get_course_forum($courseid, $type) {
             $forum->name  = get_string("namenews", "forum");
             $forum->intro = get_string("intronews", "forum");
             $forum->introformat = FORMAT_HTML;
-            $forum->forcesubscribe = FORUM_FORCESUBSCRIBE;
+            $forum->forcesubscribe = $CFG->forum_announcement_subscription;
+            $forum->maxattachments = $CFG->forum_announcement_maxattachments;
             $forum->assessed = 0;
             if ($courseid == SITEID) {
                 $forum->name  = get_string("sitenews");
