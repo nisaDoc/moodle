@@ -4506,5 +4506,16 @@ privatefiles,moodle|/user/files.php';
         upgrade_main_savepoint(true, 2022051000.00);
     }
 
+    if ($oldversion < 2022051200.01) {
+        $table = new xmldb_table('h5p');
+        $indexpathnamehash = new xmldb_index('pathnamehash_idx', XMLDB_INDEX_NOTUNIQUE, ['pathnamehash']);
+
+        if (!$dbman->index_exists($table, $indexpathnamehash)) {
+            $dbman->add_index($table, $indexpathnamehash);
+        }
+        // Cardbox savepoint reached.
+        upgrade_mod_savepoint(true, 2022051200.01, 'h5p');
+    }
+
     return true;
 }
